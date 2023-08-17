@@ -1,0 +1,49 @@
+{
+  "name": "nimbus-test-suite",
+  "version": "1.0.0",
+  "description": "This is a simple project that demonstrates e2e testing with using cypress.io and cucumber.js",
+  "main": "index.js",
+  "devDependencies": {
+    "@cucumber/cucumber": "^8.10.0",
+    "@cypress/browserify-preprocessor": "latest",
+    "@faker-js/faker": "^7.6.0",
+    "cypress": "12.17.1",
+    "cypress-recurse": "^1.27.0",
+    "cypress-wait-until": "^1.7.2",
+    "esbuild": "^0.17.5",
+    "eslint": "^8.31.0",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "multiple-cucumber-html-reporter": "3.4.0",
+    "prettier": "2.8.3",
+    "xvfb": "latest"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/e2e/**/*.{js,ts}",
+    "json": {
+      "enabled": true,
+      "output": "cypress/generate-reports/cucumber-report.json"
+    }
+  },
+  "scripts": {
+    "test": "cypress run --spec \"**/sample.feature\"",
+    "report": "node ./cypress/generate-reports/report.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burakkaygusuz/cypress-cucumber-test-example.git"
+  },
+  "keywords": [
+    "cypress",
+    "cucumber"
+  ],
+  "author": "Burak Kaygusuz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/burakkaygusuz/cypress-cucumber-test-example/issues"
+  },
+  "homepage": "https://github.com/burakkaygusuz/cypress-cucumber-test-example#readme",
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "18.0.4"
+  }
+}
