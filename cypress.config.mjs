@@ -1,11 +1,22 @@
 import { defineConfig } from 'cypress'
 import preprocessor from '@badeball/cypress-cucumber-preprocessor'
-// import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
-// import createEsbuildPlugin from '@badeball/cypress-cucumber-preprocessor/esbuild.js'
-import browserify from '@badeball/cypress-cucumber-preprocessor/browserify.js'
+import browserify from '@badeball/cypress-cucumber-preprocessor/browserify'
+import _ from 'lodash'
+import {deleteAsync} from 'del';
 const setupNodeEvents = async (on, config) => {
   await preprocessor.addCucumberPreprocessorPlugin(on, config);
-  //on("file:preprocessor", browserify.default(config));
+  on('after:spec', (spec, results) => {
+    if (results && results.video) {
+      // Do we have failures for any retry attempts?
+      const failures = _.some(results.tests, (test) => {
+        return _.some(test.attempts, { state: 'failed' })
+      })
+      if (!failures) {
+        // delete the video if the spec passed and no tests retried
+        return deleteAsync(results.video)
+      }
+    }
+  })
   on('task', {
     log(message) {
       console.log(message)

@@ -16,7 +16,9 @@
     "eslint-plugin-cypress": "^2.12.1",
     "multiple-cucumber-html-reporter": "3.4.0",
     "prettier": "2.8.3",
-    "xvfb": "latest"
+    "xvfb": "latest",
+    "del": "^7.0.0",
+    "lodash": "^4.17.21"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": "cypress/e2e/**/*.{js,ts}",
@@ -26,7 +28,7 @@
     }
   },
   "scripts": {
-    "test": "cypress run --spec \"**/sample.feature\"",
+    "test": "cypress run --e2e --spec \"**/sample.feature\"",
     "report": "node ./cypress/generate-reports/report.js"
   },
   "repository": {
